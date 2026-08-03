@@ -10,9 +10,12 @@ const contactSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    // String, not Number: a numeric type silently drops leading zeros
+    // and any "+91" prefix. Stored normalized — see utils/phone.js.
     phone:{
-        type: Number,
-        required: true
+        type: String,
+        required: true,
+        trim: true
     }
 },{
     timestamps: true

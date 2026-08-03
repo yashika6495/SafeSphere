@@ -1,0 +1,1958 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap');
+
+/* ---------------------------------------------------------
+   Guardian Grid theme
+   A dark, high-alert palette built around one idea: hazard
+   tape. Anything flagged "urgent" gets a diagonal red/black
+   stripe — the same visual grammar as tape on a barricade.
+--------------------------------------------------------- */
+
+:root {
+  --void: #0b0d12;
+  --surface: #12151d;
+  --surface-raised: #1b202b;
+  --line: #262c3a;
+
+  --alert: #e63946;
+  --alert-dim: #3a1418;
+  --alert-glow: rgba(230, 57, 70, 0.35);
+
+  --caution: #f4a340;
+  --caution-dim: #3a2a10;
+
+  --safe: #3ddc97;
+  --safe-dim: #0f2e24;
+
+  --text: #f2f4f8;
+  --text-muted: #8993a6;
+  --text-faint: #545d70;
+
+  --font-display: 'Oswald', 'Arial Narrow', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius: 10px;
+}
+
+.gg-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(230, 57, 70, 0.10), transparent 60%),
+    var(--void);
+  color: var(--text);
+  font-family: var(--font-body);
+  padding: 32px 24px 64px;
+}
+
+.gg-container {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.gg-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--alert);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.gg-eyebrow::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--alert);
+  box-shadow: 0 0 0 4px var(--alert-glow);
+}
+
+.gg-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 32px;
+  letter-spacing: 0.01em;
+  margin: 0 0 4px;
+}
+
+.gg-subtitle {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin: 0 0 28px;
+}
+
+/* Hazard stripe — the signature element. A thin diagonal
+   red/black band. Reserved for things that need attention now. */
+.gg-hazard {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--alert) 0px,
+    var(--alert) 10px,
+    #0b0d12 10px,
+    #0b0d12 20px
+  );
+  height: 5px;
+  border-radius: 3px 3px 0 0;
+}
+
+.gg-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.gg-card-body {
+  padding: 18px 20px;
+}
+
+.gg-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.gg-card-title {
+  font-weight: 600;
+  font-size: 15px;
+  margin: 0 0 4px;
+}
+
+.gg-card-meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+.gg-card-text {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 6px 0 0;
+  line-height: 1.5;
+}
+
+.gg-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.gg-badge-alert { background: var(--alert-dim); color: #ff8a93; }
+.gg-badge-caution { background: var(--caution-dim); color: var(--caution); }
+.gg-badge-safe { background: var(--safe-dim); color: var(--safe); }
+.gg-badge-neutral { background: var(--surface-raised); color: var(--text-muted); }
+
+.gg-btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.gg-btn:active { transform: scale(0.97); }
+
+.gg-btn-primary {
+  background: var(--alert);
+  color: #fff;
+}
+.gg-btn-primary:hover { background: #ff4d59; }
+
+.gg-btn-ghost {
+  background: var(--surface-raised);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+.gg-btn-ghost:hover { border-color: var(--alert); color: #ff8a93; }
+
+.gg-btn-danger-outline {
+  background: transparent;
+  color: #ff8a93;
+  border: 1px solid var(--alert-dim);
+}
+.gg-btn-danger-outline:hover { background: var(--alert-dim); }
+
+.gg-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.gg-input {
+  width: 100%;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 11px 13px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.gg-input:focus {
+  outline: none;
+  border-color: var(--alert);
+  box-shadow: 0 0 0 3px var(--alert-glow);
+}
+
+.gg-input::placeholder { color: var(--text-faint); }
+
+.gg-form-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.gg-empty {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text-muted);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  font-size: 14px;
+}
+
+.gg-loading {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.gg-error-banner {
+  background: var(--alert-dim);
+  color: #ff8a93;
+  border: 1px solid var(--alert);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.gg-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.gg-stat {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+
+.gg-stat-value {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.gg-stat-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.gg-bar-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 40px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.gg-bar-track {
+  height: 8px;
+  background: var(--surface-raised);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.gg-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--alert), var(--caution));
+}
+
+.gg-section-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 32px 0 14px;
+  letter-spacing: 0.01em;
+}
+
+.gg-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.gg-table th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.gg-table td {
+  padding: 10px 10px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+}
+
+/* --- Profile screen --------------------------------------------- */
+
+.gg-back {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-bottom: 22px;
+}
+
+.gg-back:hover { color: #ff8a93; }
+
+.gg-profile-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.gg-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.gg-detail-row:first-child { padding-top: 0; }
+
+.gg-contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 10px;
+}
+
+@media (max-width: 560px) {
+  .gg-contact-form { grid-template-columns: 1fr; }
+  .gg-profile-head { gap: 14px; }
+}
+
+.gg-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--alert-dim);
+  color: #ff8a93;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   Auth screens — a centred card over a living city map.
+   The route animation previews what the app is for: tracing
+   a path through a place and knowing whether it's safe.
+   ========================================================= */
+
+.gg-auth {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px;
+  overflow: hidden;
+  background: var(--void);
+}
+
+.gg-auth-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+}
+
+/* The product name, set large — this is the first thing on the screen. */
+.gg-wordmark {
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: 0.012em;
+  color: var(--text);
+  margin-bottom: 26px;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.9);
+}
+
+/* The header block reads as one centred unit above the card. */
+.gg-auth .gg-title,
+.gg-auth .gg-subtitle { text-align: center; }
+
+@media (max-width: 480px) {
+  .gg-wordmark { font-size: 34px; margin-bottom: 20px; }
+}
+
+.gg-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gg-backdrop-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Darkens the edges and the centre just enough that the card
+   never has to fight the map for contrast. */
+.gg-backdrop-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(11, 13, 18, 0.88) 0%, rgba(11, 13, 18, 0.55) 34%, transparent 68%),
+    radial-gradient(900px 520px at 12% -8%, rgba(230, 57, 70, 0.13), transparent 62%),
+    linear-gradient(to bottom, rgba(11, 13, 18, 0.7), transparent 22%, transparent 74%, rgba(11, 13, 18, 0.85));
+}
+
+/* --- Map surfaces ----------------------------------------------
+   Dark-mode equivalent of the light reference: the land sits just
+   above the page background, and roads sit above the land. Same
+   figure/ground relationship, inverted tonally. */
+
+/* --- Backdrop map -----------------------------------------------
+   Palette and weights tuned by rasterising utils/cityMap.js and
+   looking at the output, not by guessing. */
+
+.gg-backdrop-svg { width: 100%; height: 100%; display: block; }
+
+.gg-map-land  { fill: #171c26; }
+.gg-map-zone  { fill: #1c1913; }
+.gg-map-park  { fill: #16241c; }
+
+.gg-map-water {
+  fill: none;
+  stroke: #183a58;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+/* Three road weights. Every casing renders below every fill, so
+   junctions merge into junctions rather than stacking. */
+.gg-road-casing path,
+.gg-road-fill path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.gg-road-casing .gg-road-minor     { stroke: #10151d; stroke-width: 3.2; }
+.gg-road-casing .gg-road-secondary { stroke: #0d1118; stroke-width: 6; }
+.gg-road-casing .gg-road-major     { stroke: #0b0e14; stroke-width: 11; }
+
+.gg-road-fill .gg-road-minor     { stroke: #39435a; stroke-width: 1.8; }
+.gg-road-fill .gg-road-secondary { stroke: #4a5570; stroke-width: 3.4; }
+.gg-road-fill .gg-road-major     { stroke: #5d6885; stroke-width: 7; }
+
+/* --- Routes ------------------------------------------------------
+   Sized to sit inside the road they run along. The bed stays faint so
+   it hints at the path without tinting the whole street. */
+.gg-route-bed,
+.gg-route-pulse {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.gg-route-bed {
+  stroke: currentColor;
+  stroke-width: 3;
+  opacity: 0.1;
+}
+
+/* One short lit dash sliding the length of the path. */
+.gg-route-pulse {
+  stroke: currentColor;
+  stroke-width: 3;
+  opacity: 0.95;
+  stroke-dasharray: 0.11 0.89;
+  filter: drop-shadow(0 0 4px currentColor);
+  animation-name: gg-route-travel;
+  animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+  animation-iteration-count: infinite;
+}
+
+@keyframes gg-route-travel {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+
+.gg-route-alert   { color: #e63946; }
+.gg-route-safe    { color: #3ddc97; }
+.gg-route-caution { color: #f4a340; }
+
+.gg-beacon-dot { fill: currentColor; }
+
+.gg-beacon-ring {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: gg-beacon-pulse 3.2s ease-out infinite;
+}
+
+@keyframes gg-beacon-pulse {
+  0%        { transform: scale(0.5); opacity: 0.9; }
+  70%, 100% { transform: scale(3.4); opacity: 0; }
+}
+
+.gg-beacon-alert   { color: #e63946; }
+.gg-beacon-safe    { color: #3ddc97; }
+.gg-beacon-caution { color: #f4a340; }
+
+/* --- Card + entrance ------------------------------------------ */
+
+.gg-card-glass {
+  background: rgba(18, 21, 29, 0.82);
+  backdrop-filter: blur(14px) saturate(125%);
+  -webkit-backdrop-filter: blur(14px) saturate(125%);
+  border: 1px solid var(--line);
+  box-shadow:
+    0 28px 64px -16px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.gg-rise {
+  opacity: 0;
+  animation: gg-rise 0.62s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.gg-rise-1 { animation-delay: 0.05s; }
+.gg-rise-2 { animation-delay: 0.13s; }
+.gg-rise-3 { animation-delay: 0.21s; }
+.gg-rise-4 { animation-delay: 0.30s; }
+
+@keyframes gg-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* --- Field-level validation ----------------------------------- */
+
+.gg-field {
+  display: grid;
+  gap: 6px;
+}
+
+.gg-input-invalid {
+  border-color: var(--alert);
+}
+
+.gg-input-invalid:focus {
+  border-color: var(--alert);
+  box-shadow: 0 0 0 3px var(--alert-glow);
+}
+
+.gg-field-error {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: #ff8a93;
+}
+
+.gg-field-hint {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-faint);
+}
+
+.gg-auth-footer {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 18px 0 0;
+}
+
+.gg-link {
+  color: #ff8a93;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.gg-link:hover { text-decoration: underline; }
+
+/* =========================================================
+   Map screen
+   ========================================================= */
+
+.gg-map-screen {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--void);
+}
+
+.gg-map-canvas {
+  height: 100%;
+  width: 100%;
+  background: var(--void);
+}
+
+.gg-map-boot {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  background: var(--void);
+  color: var(--text);
+  font-family: var(--font-body);
+  padding: 24px;
+}
+
+.gg-map-boot .gg-eyebrow { justify-content: center; }
+
+/* --- Markers ---------------------------------------------------- */
+
+.gg-marker { background: none; border: 0; }
+
+.gg-pin {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #0b0d12;
+  box-shadow: 0 0 0 1px currentColor, 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.gg-pin-high    { background: var(--alert);   color: var(--alert); }
+.gg-pin-medium  { background: var(--caution); color: var(--caution); }
+.gg-pin-low     { background: var(--safe);    color: var(--safe); }
+
+.gg-pin-police {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  background: #5b8def;
+  border: 2px solid #0b0d12;
+  box-shadow: 0 0 0 1px #5b8def, 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.gg-pin-dest {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: transparent;
+  border: 3px solid var(--text);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
+}
+
+/* Your own position. Reports are flat circles and stations are squares,
+   so this is a raised teardrop — different shape, different colour, and
+   it stands above the map surface rather than sitting on it. */
+.gg-me {
+  position: relative;
+  display: block;
+  width: 30px;
+  height: 34px;
+  cursor: grab;
+}
+
+.gg-me:active { cursor: grabbing; }
+
+.gg-me-pin {
+  position: absolute;
+  left: 3px;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+  background: #f2f4f8;
+  border: 3px solid var(--alert);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.75);
+}
+
+.gg-me-pin::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--alert);
+}
+
+/* Pulse sits at the tip — the actual coordinate. */
+.gg-me-halo {
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: var(--alert);
+  opacity: 0.45;
+  animation: gg-me-pulse 2.4s ease-out infinite;
+}
+
+@keyframes gg-me-pulse {
+  0%   { transform: scale(0.6); opacity: 0.55; }
+  70%  { transform: scale(3.2); opacity: 0; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+
+/* --- Floating chrome -------------------------------------------- */
+
+.gg-map-legend,
+.gg-map-notice,
+.gg-map-toggle {
+  position: absolute;
+  z-index: 1000;
+  background: rgba(18, 21, 29, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.8);
+}
+
+.gg-map-notice {
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 9px 16px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  max-width: min(520px, calc(100vw - 480px));
+}
+
+.gg-map-notice-error {
+  color: #ff8a93;
+  border-color: var(--alert);
+  background: rgba(58, 20, 24, 0.92);
+}
+
+.gg-map-legend {
+  bottom: 18px;
+  right: 18px;
+  display: flex;
+  gap: 14px;
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.gg-map-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gg-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.gg-dot-high   { background: var(--alert); }
+.gg-dot-medium { background: var(--caution); }
+.gg-dot-low    { background: var(--safe); }
+.gg-dot-police { background: #5b8def; border-radius: 2px; }
+
+/* Miniature of the teardrop, so the legend matches the map. */
+.gg-dot-me {
+  background: #f2f4f8;
+  border: 2px solid var(--alert);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  width: 10px;
+  height: 10px;
+  box-sizing: border-box;
+}
+
+.gg-map-toggle {
+  top: 18px;
+  left: 18px;
+  padding: 10px 18px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.gg-map-toggle:hover { border-color: var(--alert); color: #ff8a93; }
+
+.gg-map-spinner {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  border-top-color: var(--alert);
+  animation: gg-spin 0.8s linear infinite;
+}
+
+@keyframes gg-spin { to { transform: rotate(360deg); } }
+
+/* Account button, top right — opposite corner from the panel. */
+.gg-map-account {
+  position: absolute;
+  z-index: 1000;
+  top: 18px;
+  right: 18px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(18, 21, 29, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.8);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.14s ease, transform 0.14s ease;
+}
+
+.gg-map-account:hover {
+  border-color: var(--alert);
+  color: #ff8a93;
+  transform: translateY(-1px);
+}
+
+/* --- Dropdown ----------------------------------------------------
+   A real listbox rather than a native <select>, whose popup can't be
+   styled and which overlays its own trigger on macOS. */
+
+.gg-sel-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 11px 13px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: border-color 0.12s ease;
+}
+
+.gg-sel-trigger:hover { border-color: var(--text-faint); }
+
+.gg-sel-trigger:focus-visible,
+.gg-sel-trigger.is-open {
+  outline: none;
+  border-color: var(--alert);
+  box-shadow: 0 0 0 3px var(--alert-glow);
+}
+
+.gg-sel-trigger.is-invalid { border-color: var(--alert); }
+
+.gg-sel-placeholder { color: var(--text-faint); }
+
+.gg-sel-chevron {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  margin-top: -3px;
+  border-right: 2px solid var(--text-muted);
+  border-bottom: 2px solid var(--text-muted);
+  transform: rotate(45deg);
+  transition: transform 0.18s ease, margin-top 0.18s ease;
+}
+
+.gg-sel-trigger.is-open .gg-sel-chevron {
+  transform: rotate(-135deg);
+  margin-top: 3px;
+}
+
+/* Portalled to <body>, so it sits above the modal scrim (z 2000)
+   and escapes the modal body's overflow clipping. */
+.gg-sel-panel {
+  position: fixed;
+  z-index: 3000;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  overflow-y: auto;
+  background: rgba(24, 28, 38, 0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow:
+    0 28px 60px -14px rgba(0, 0, 0, 0.92),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  animation: gg-sel-in 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes gg-sel-in {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.gg-sel-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: none;
+  border: 0;
+  border-radius: 7px;
+  padding: 10px 12px;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.gg-sel-option.is-active {
+  background: var(--surface-raised);
+  color: var(--text);
+}
+
+.gg-sel-option.is-selected { color: #ff8a93; font-weight: 600; }
+
+/* Drawn rather than a glyph, so it inherits the accent colour. */
+.gg-sel-tick {
+  width: 5px;
+  height: 9px;
+  flex-shrink: 0;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  margin-bottom: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gg-sel-panel { animation: none; }
+  .gg-sel-chevron { transition: none; }
+}
+
+.gg-map-notice-ok {
+  color: var(--safe);
+  border-color: var(--safe);
+  background: rgba(15, 46, 36, 0.94);
+}
+
+/* The primary action on the screen — deliberately the only solid red
+   surface outside the panel, so it reads before anything else. */
+.gg-map-report {
+  position: absolute;
+  z-index: 1000;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 22px 13px 16px;
+  background: var(--alert);
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px -6px var(--alert-glow), 0 18px 44px -18px rgba(0, 0, 0, 0.9);
+  transition: transform 0.14s ease, background 0.14s ease;
+}
+
+.gg-map-report:hover { background: #ff4d59; transform: translateX(-50%) translateY(-2px); }
+.gg-map-report:active { transform: translateX(-50%) scale(0.98); }
+
+.gg-map-report-mark {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+/* --- Report dialog ---------------------------------------------- */
+
+.gg-modal-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(6, 8, 12, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  animation: gg-fade 0.2s ease;
+}
+
+@keyframes gg-fade { from { opacity: 0; } to { opacity: 1; } }
+
+.gg-modal {
+  width: min(560px, 100%);
+  max-height: min(88vh, 780px);
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 40px 90px -24px rgba(0, 0, 0, 0.95);
+  animation: gg-modal-in 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes gg-modal-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.985); }
+  to   { opacity: 1; transform: none; }
+}
+
+.gg-modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.gg-modal-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  margin: 2px 0 0;
+}
+
+.gg-modal-body {
+  padding: 20px 22px 22px;
+  overflow-y: auto;
+  display: grid;
+  gap: 20px;
+}
+
+.gg-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.gg-optional {
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-faint);
+  opacity: 0.7;
+}
+
+.gg-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.gg-chip {
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 14px;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.12s ease, color 0.12s ease;
+}
+
+.gg-chip:hover { border-color: var(--text-faint); color: var(--text); }
+
+.gg-chip.is-active {
+  background: var(--alert-dim);
+  border-color: var(--alert);
+  color: #ff8a93;
+  font-weight: 600;
+}
+
+.gg-seg {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 5px;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.gg-seg-btn {
+  background: none;
+  border: 0;
+  border-radius: 7px;
+  padding: 9px 0;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.gg-seg-btn:hover { color: var(--text); }
+
+.gg-seg-low.is-active    { background: var(--safe-dim);    color: var(--safe); }
+.gg-seg-medium.is-active { background: var(--caution-dim); color: var(--caution); }
+.gg-seg-high.is-active   { background: var(--alert-dim);   color: #ff8a93; }
+
+.gg-textarea {
+  resize: vertical;
+  min-height: 96px;
+  line-height: 1.5;
+  font-family: var(--font-body);
+}
+
+.gg-modal-where {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+}
+
+.gg-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+@media (max-width: 620px) {
+  .gg-modal-scrim { padding: 0; align-items: end; }
+  .gg-modal { max-height: 92vh; border-radius: var(--radius) var(--radius) 0 0; }
+  .gg-map-report { bottom: 16px; }
+}
+
+/* --- Detail panel ----------------------------------------------- */
+
+.gg-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  width: min(400px, 92vw);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(15, 18, 25, 0.94);
+  backdrop-filter: blur(18px) saturate(120%);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
+  border-right: 1px solid var(--line);
+  box-shadow: 24px 0 60px -20px rgba(0, 0, 0, 0.9);
+  animation: gg-panel-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes gg-panel-in {
+  from { transform: translateX(-28px); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+
+.gg-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.gg-panel-close {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text-muted);
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.gg-panel-close:hover { border-color: var(--alert); color: #ff8a93; }
+
+.gg-panel-body {
+  overflow-y: auto;
+  padding: 18px 20px 32px;
+  flex: 1;
+}
+
+.gg-panel-section { margin-bottom: 26px; }
+
+.gg-panel-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 12px;
+}
+
+.gg-panel-count {
+  background: var(--surface-raised);
+  border-radius: 999px;
+  padding: 1px 8px;
+  color: var(--text-muted);
+}
+
+/* Score readout */
+.gg-score {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 18px 0 24px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 24px;
+}
+
+.gg-score-value {
+  font-family: var(--font-display);
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 0.9;
+  flex-shrink: 0;
+}
+
+.gg-score-max {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-faint);
+  margin-left: 2px;
+}
+
+.gg-score-alert   { color: var(--alert); }
+.gg-score-caution { color: var(--caution); }
+.gg-score-safe    { color: var(--safe); }
+
+.gg-meter {
+  display: grid;
+  grid-template-columns: 74px 1fr 28px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 9px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.gg-meter-track {
+  height: 6px;
+  background: var(--surface-raised);
+  border-radius: 999px;
+  overflow: hidden;
+  display: block;
+}
+
+.gg-meter-fill { display: block; height: 100%; border-radius: 999px; }
+.gg-meter-neutral { background: linear-gradient(90deg, var(--alert), var(--caution)); }
+.gg-meter-high   { background: var(--alert); }
+.gg-meter-medium { background: var(--caution); }
+.gg-meter-low    { background: var(--safe); }
+
+.gg-meter em {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 11.5px;
+  text-align: right;
+}
+
+/* --- Route endpoints -------------------------------------------- */
+
+.gg-route-ends {
+  display: grid;
+  gap: 9px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  position: relative;
+}
+
+/* Connector between the two dots */
+.gg-route-ends::before {
+  content: "";
+  position: absolute;
+  left: 18.5px;
+  top: 26px;
+  bottom: 26px;
+  width: 1px;
+  border-left: 1px dashed var(--line);
+}
+
+.gg-route-end {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 13.5px;
+  line-height: 1.35;
+  position: relative;
+  z-index: 1;
+}
+
+.gg-route-end span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gg-dot-dest {
+  background: transparent;
+  border: 2px solid var(--text);
+  width: 10px;
+  height: 10px;
+  box-sizing: border-box;
+}
+
+/* --- Travel modes ------------------------------------------------ */
+
+.gg-modes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 5px;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.gg-mode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: none;
+  border: 0;
+  border-radius: 7px;
+  padding: 9px 0;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.gg-mode:hover { color: var(--text); }
+
+.gg-mode.is-active {
+  background: var(--alert-dim);
+  color: #ff8a93;
+}
+
+.gg-mode-icon { font-size: 14px; line-height: 1; }
+
+/* --- Route options ----------------------------------------------- */
+
+.gg-options {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.gg-option {
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  color: var(--text);
+  transition: border-color 0.14s ease, background 0.14s ease;
+}
+
+.gg-option:hover { border-color: var(--text-faint); }
+
+.gg-option.is-active {
+  border-color: var(--alert);
+  background: linear-gradient(
+    180deg,
+    rgba(230, 57, 70, 0.08),
+    transparent
+  );
+}
+
+.gg-option-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.gg-option-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.gg-option.is-active .gg-option-label { color: #ff8a93; }
+
+.gg-option-stat {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.gg-option-stat span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-faint);
+}
+
+/* --- Route summary ---------------------------------------------- */
+
+.gg-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.gg-steps li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 0 8px 26px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  position: relative;
+  counter-increment: step;
+}
+
+.gg-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--surface-raised);
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  display: grid;
+  place-items: center;
+}
+
+.gg-steps li:last-child { border-bottom: 0; }
+
+.gg-steps em {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 11.5px;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+/* --- Live route warnings ---------------------------------------- */
+
+.gg-toasts {
+  position: absolute;
+  z-index: 1500;
+  left: calc(min(400px, 92vw) + 22px);
+  bottom: 22px;
+  display: grid;
+  gap: 10px;
+  width: min(360px, calc(100vw - min(400px, 92vw) - 44px));
+}
+
+.gg-toast {
+  background: rgba(18, 21, 29, 0.97);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 22px 50px -16px rgba(0, 0, 0, 0.9);
+  animation: gg-toast-in 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gg-toast-alert   { border-color: var(--alert); }
+.gg-toast-caution { border-color: var(--caution-dim); }
+
+@keyframes gg-toast-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+.gg-toast-body { padding: 12px 14px 13px; }
+
+.gg-toast-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.gg-toast-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--alert);
+}
+
+.gg-toast-close {
+  background: none;
+  border: 0;
+  color: var(--text-faint);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0 2px;
+}
+
+.gg-toast-close:hover { color: var(--text); }
+
+.gg-toast-text {
+  margin: 0 0 5px;
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+@media (max-width: 900px) {
+  .gg-toasts {
+    left: 16px;
+    right: 16px;
+    width: auto;
+    bottom: 84px;
+  }
+}
+
+/* Direction of travel for this area */
+.gg-trend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  background: var(--surface);
+}
+
+.gg-trend-arrow {
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.gg-trend-headline {
+  font-weight: 600;
+  font-size: 13.5px;
+  margin-bottom: 2px;
+}
+
+.gg-trend-up   { border-color: var(--alert-dim); }
+.gg-trend-up   .gg-trend-arrow { color: var(--alert); }
+.gg-trend-down .gg-trend-arrow { color: var(--safe); }
+.gg-trend-flat .gg-trend-arrow { color: var(--text-faint); }
+
+/* Layer switcher, sits above the legend */
+.gg-map-layers {
+  position: absolute;
+  z-index: 1000;
+  bottom: 68px;
+  right: 18px;
+  display: flex;
+  padding: 4px;
+  gap: 4px;
+  background: rgba(18, 21, 29, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.8);
+}
+
+.gg-map-layers button {
+  background: none;
+  border: 0;
+  border-radius: 7px;
+  padding: 7px 14px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.gg-map-layers button:hover { color: var(--text); }
+
+.gg-map-layers button.is-active {
+  background: var(--alert-dim);
+  color: #ff8a93;
+}
+
+.gg-recent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.gg-recent .gg-dot { margin-top: 5px; }
+
+/* --- Leaflet overrides ------------------------------------------ */
+
+.leaflet-container { background: #0b0d12; font-family: var(--font-body); }
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 44px -14px rgba(0, 0, 0, 0.9);
+}
+
+.leaflet-popup-content-wrapper { border-radius: var(--radius); }
+.leaflet-popup-content { margin: 14px 16px; font-size: 13px; }
+.leaflet-popup-close-button { color: var(--text-faint) !important; }
+
+.gg-popup-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin: 8px 0 4px;
+}
+
+.gg-popup-text {
+  color: var(--text-muted);
+  margin: 0 0 6px;
+  line-height: 1.45;
+}
+
+.gg-popup-link {
+  color: #ff8a93;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.leaflet-control-attribution {
+  background: rgba(11, 13, 18, 0.8) !important;
+  color: var(--text-faint) !important;
+  font-size: 10px !important;
+}
+
+.leaflet-control-attribution a { color: var(--text-muted) !important; }
+
+@media (max-width: 900px) {
+  .gg-panel { width: 100vw; }
+  .gg-map-legend { display: none; }
+  .gg-map-notice { max-width: calc(100vw - 36px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gg-route-pulse,
+  .gg-beacon-ring,
+  .gg-me-halo,
+  .gg-panel,
+  .gg-map-spinner,
+  .gg-rise {
+    animation: none;
+  }
+  .gg-rise { opacity: 1; transform: none; }
+  .gg-route-pulse { stroke-dasharray: none; opacity: 0.5; }
+  .gg-beacon-ring { opacity: 0.35; }
+}
+
+/* =========================================================
+   Place search, SOS, and the heat legend
+   ========================================================= */
+
+.gg-search {
+  position: absolute;
+  z-index: 1200;
+  top: 18px;
+  left: calc(min(400px, 92vw) + 22px);
+  width: min(380px, calc(100vw - min(400px, 92vw) - 110px));
+}
+
+.gg-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 13px;
+  background: rgba(18, 21, 29, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.85);
+}
+
+.gg-search-bar:focus-within { border-color: var(--alert); }
+
+.gg-search-icon { color: var(--text-faint); font-size: 17px; line-height: 1; }
+
+.gg-search-input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: 0;
+  outline: none;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+.gg-search-input::placeholder { color: var(--text-faint); }
+
+.gg-search-clear {
+  background: none;
+  border: 0;
+  color: var(--text-faint);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.gg-search-clear:hover { color: #ff8a93; }
+
+.gg-search-results {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 6px;
+  background: rgba(18, 21, 29, 0.97);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 22px 50px -14px rgba(0, 0, 0, 0.9);
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.gg-search-results button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-radius: 7px;
+  padding: 9px 11px;
+  cursor: pointer;
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+.gg-search-results button.is-active { background: var(--surface-raised); }
+
+.gg-search-name { display: block; font-size: 13.5px; font-weight: 600; }
+
+.gg-search-context {
+  display: block;
+  font-size: 11.5px;
+  color: var(--text-faint);
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gg-search-empty {
+  padding: 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* --- SOS --------------------------------------------------------- */
+
+.gg-map-sos {
+  position: absolute;
+  z-index: 1000;
+  top: 18px;
+  right: 74px;
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--alert);
+  color: #fff;
+  border: 0;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  box-shadow: 0 8px 26px -6px var(--alert-glow), 0 14px 36px -14px rgba(0, 0, 0, 0.9);
+  transition: transform 0.14s ease, background 0.14s ease;
+}
+
+.gg-map-sos:hover { background: #ff4d59; transform: translateY(-1px); }
+
+.gg-modal-sos { width: min(430px, 100%); }
+
+/* Unmissable: this button does not summon help. */
+.gg-sos-sim {
+  background: var(--caution-dim);
+  color: var(--caution);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.gg-sos-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 150px;
+  height: 150px;
+  margin: 6px auto 4px;
+  border-radius: 50%;
+  background: var(--alert-dim);
+  border: 0;
+  color: #ff8a93;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.gg-sos-button:active { background: #4a181e; }
+
+.gg-sos-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.gg-sos-ring circle {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 5;
+}
+
+.gg-sos-ring-fill {
+  stroke: var(--alert) !important;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.06s linear;
+}
+
+.gg-sos-would {
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 13px 15px;
+}
+
+.gg-sos-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 13.5px;
+}
+
+.gg-sos-row em {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 11.5px;
+  color: var(--text-faint);
+}
+
+.gg-sos-row-empty { color: var(--text-muted); font-size: 13px; }
+
+.gg-sos-state { display: grid; gap: 16px; justify-items: center; }
+
+.gg-sos-notreal {
+  background: var(--caution-dim);
+  border: 1px solid var(--caution);
+  border-radius: var(--radius);
+  padding: 13px 15px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--caution);
+}
+
+@media (max-width: 900px) {
+  .gg-search {
+    left: 16px;
+    right: 76px;
+    width: auto;
+  }
+  .gg-map-sos { right: 16px; top: 70px; }
+}

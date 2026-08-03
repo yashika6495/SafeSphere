@@ -47,6 +47,27 @@ const getAllCrimes = async (req,res)=>{
     }
 }
 
+/**
+ * The signed-in user's own reports, newest first.
+ *
+ * Exists so the profile screen doesn't have to fetch every crime in the
+ * database and filter client-side.
+ */
+const getMyCrimes = async (req, res) => {
+    try {
+        const crimes = await Crime.find({ userId: req.user.id })
+            .sort({ createdAt: -1 })
+            .limit(50);
+
+        res.status(200).json(crimes);
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
 const getCrimeById = async (req, res) => {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
@@ -156,28 +177,57 @@ const getNearbyCrimes = async (req, res) => {
     }
 };
 
+/**
+ * Buckets crimes into a grid for a density overlay.
+ *
+ * `precision` is decimal places of lat/lng, so it sets the cell size:
+ *   3 -> ~110m   2 -> ~1.1km   1 -> ~11km
+ * The default was 3, which is finer than reports cluster — nearly every
+ * cell came back with a count of 1 and the "heatmap" was flat. 2 is the
+ * useful default at city zoom.
+ *
+ * Cells carry a severity-weighted total as well as a raw count, so one
+ * assault doesn't read the same as one pickpocketing.
+ */
 const getCrimeMapData = async (req, res) => {
     try {
+
+        const requested = Number(req.query.precision ?? 2);
+        const precision = Number.isFinite(requested)
+            ? Math.min(4, Math.max(0, Math.trunc(requested)))
+            : 2;
 
         const heatmapData = await Crime.aggregate([
             {
                 $group: {
                     _id: {
                         latitude: {
-                            $round: ["$latitude", 3]
+                            $round: ["$latitude", precision]
                         },
                         longitude: {
-                            $round: ["$longitude", 3]
+                            $round: ["$longitude", precision]
                         }
                     },
                     crimeCount: {
                         $sum: 1
                     },
+                    weight: {
+                        $sum: {
+                            $switch: {
+                                branches: [
+                                    { case: { $eq: ["$severity", "High"] }, then: 3 },
+                                    { case: { $eq: ["$severity", "Medium"] }, then: 2 }
+                                ],
+                                default: 1
+                            }
+                        }
+                    },
                     categories: {
-                        $push: "$category"
+                        $addToSet: "$category"
                     }
                 }
-            }
+            },
+            { $sort: { weight: -1 } }
         ]);
 
         res.status(200).json(heatmapData);
@@ -195,6 +245,7 @@ const getCrimeMapData = async (req, res) => {
 module.exports = {
     createCrime,
     getAllCrimes,
+    getMyCrimes,
     getCrimeById,
     deleteCrime,
     getNearbyCrimes,
