@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
+/* Base page shell. Colours and fonts come from styles/theme.css,
+   which main.jsx loads immediately after this file. */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: white;
+  font-family: var(--font-body);
+  background: var(--void);
+  color: var(--text);
 }

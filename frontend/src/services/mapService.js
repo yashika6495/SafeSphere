@@ -33,9 +33,12 @@ export const getSafetyScore = async (latitude, longitude) => {
 };
 
 // Safety Tips
+// Mounted at /api/safety/tips/:category in server.js — the old
+// /safety-tips/:category path 404s, which used to take the whole
+// map data load down with it.
 export const getSafetyTips = async (category) => {
     const response = await API.get(
-        `/safety-tips/${category}`
+        `/safety/tips/${encodeURIComponent(category)}`
     );
     return response.data;
 };
@@ -45,16 +48,25 @@ export const getSafeRoute = async (
     sourceLatitude,
     sourceLongitude,
     destinationLatitude,
-    destinationLongitude
+    destinationLongitude,
+    mode = "walk"
 ) => {
 
     const response = await API.post("/routes/safe-path", {
         sourceLatitude,
         sourceLongitude,
         destinationLatitude,
-        destinationLongitude
+        destinationLongitude,
+        mode
     });
 
+    return response.data;
+};
+
+// Crime density grid for the heat overlay.
+// precision = decimal places of lat/lng: 2 ≈ 1.1km cells.
+export const getCrimeHeatmap = async (precision = 2) => {
+    const response = await API.get(`/crimes/map?precision=${precision}`);
     return response.data;
 };
 
@@ -67,5 +79,13 @@ export const getCrimeSeverity = async () => {
 // Crime Categories
 export const getCrimeCategories = async () => {
     const response = await API.get("/admin/crime-categories");
+    return response.data;
+};
+// Place search, proxied through our API (Nominatim requires a
+// User-Agent and rate-limits per caller — see backend/utils/geocode.js).
+export const searchPlaces = async (query, latitude, longitude) => {
+    const response = await API.get("/geocode/search", {
+        params: { q: query, lat: latitude, lng: longitude },
+    });
     return response.data;
 };

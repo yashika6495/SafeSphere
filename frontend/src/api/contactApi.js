@@ -1,4 +1,4 @@
-import api from "./axiosInstance";
+import api from "../axiosInstance";
 
 export const getContacts = async () => {
     const res = await api.get("/contacts");

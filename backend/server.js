@@ -16,6 +16,7 @@ const safetyRoutes = require('./routes/safetyRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const routeRoutes = require("./routes/routeRoutes");
 const policeRoutes = require("./routes/policeRoutes");
+const geocodeRoutes = require("./routes/geocodeRoutes");
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use('/api/safety',safetyRoutes);
 app.use('/api/admin',adminRoutes);
 app.use("/api/routes", routeRoutes);
 app.use("/api/police",policeRoutes);
+app.use("/api/geocode",geocodeRoutes);
 
 const PORT = process.env.PORT || 5000;
 

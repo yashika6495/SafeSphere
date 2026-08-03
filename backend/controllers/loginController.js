@@ -6,7 +6,11 @@ const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        const user = await User.findOne({ email });
+        // Register stores emails lowercased, so look up the same way —
+        // otherwise "Demo@x.com" can create an account it can't sign into.
+        const user = await User.findOne({
+            email: String(email || "").trim().toLowerCase()
+        });
 
         if (!user) {
             return res.status(400).json({
